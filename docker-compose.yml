@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  model_server:
+    build: ./model_server
+    container_name: model_server
+  proxy:
+    build: ./proxy  # optional: or run proxy on host and map ports
+    container_name: proxy
+    ports:
+      - "8081:8080"  # 클라이언트는 proxy:8081로 요청
+    depends_on:
+      - model_server
